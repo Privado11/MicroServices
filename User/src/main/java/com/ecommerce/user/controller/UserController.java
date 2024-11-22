@@ -29,15 +29,35 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDto> save(UserToSaveDto userDto) {
+    public ResponseEntity<UserDto> save(@RequestBody UserToSaveDto userDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(userDto));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> findById(@PathVariable Long id) {
+    public ResponseEntity<UserDto> findById(@PathVariable("id") Long id) {
         try {
             UserDto carDto = userService.findById(id);
             return ResponseEntity.ok(carDto);
+        } catch (NotFoundExceptionEntity ex) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDto> update(@PathVariable("id") Long id, @RequestBody UserToSaveDto userDto) {
+        try {
+            UserDto carDto = userService.update(id, userDto);
+            return ResponseEntity.ok(carDto);
+        } catch (NotFoundExceptionEntity ex) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+        try {
+            userService.deleteById(id);
+            return ResponseEntity.noContent().build();
         } catch (NotFoundExceptionEntity ex) {
             return ResponseEntity.notFound().build();
         }

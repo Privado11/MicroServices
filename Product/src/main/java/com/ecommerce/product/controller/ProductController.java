@@ -1,5 +1,7 @@
 package com.ecommerce.product.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +25,17 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDto> save(ProductToSaveDto productDto) {
+    public ResponseEntity<ProductDto> save(@RequestBody ProductToSaveDto productDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(productDto));
     }
 
+    @GetMapping
+    public ResponseEntity<List<ProductDto>> findAll() {
+        return ResponseEntity.ok(productService.findAll());
+    }
+
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDto> findById(@PathVariable Long id) {
+    public ResponseEntity<ProductDto> findById(@PathVariable("id") Long id) {
         try {
             ProductDto productDto = productService.findById(id);
             return ResponseEntity.ok(productDto);
@@ -38,7 +45,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductDto> update(@PathVariable Long id, ProductToSaveDto productDto) {
+    public ResponseEntity<ProductDto> update(@PathVariable("id") Long id, @RequestBody ProductToSaveDto productDto) {
         try {
             ProductDto productDtoUpdated = productService.update(id, productDto);
             return ResponseEntity.ok(productDtoUpdated);
@@ -48,7 +55,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteById(@PathVariable("id") Long id) {
         try {
             productService.deleteById(id);
             return ResponseEntity.noContent().build();

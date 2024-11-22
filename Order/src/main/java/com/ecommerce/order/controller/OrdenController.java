@@ -23,13 +23,18 @@ public class OrdenController {
         this.ordenService = ordenService;
     }
 
+    @GetMapping
+    public ResponseEntity<?> findAll() {
+        return ResponseEntity.ok(ordenService.findAll());
+    }
+
     @PostMapping
-    public ResponseEntity<OrdenDto> save(OrdenToSaveDto ordenDto) {
+    public ResponseEntity<OrdenDto> save(@RequestBody OrdenToSaveDto ordenDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(ordenService.save(ordenDto));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<OrdenDto> findById(@PathVariable Long id) {
+    public ResponseEntity<OrdenDto> findById(@PathVariable("id") Long id) {
         try {
             OrdenDto ordenDto = ordenService.findById(id);
             return ResponseEntity.ok(ordenDto);
@@ -39,7 +44,7 @@ public class OrdenController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<OrdenDto> update(@PathVariable Long id, OrdenToSaveDto ordenDto) {
+    public ResponseEntity<OrdenDto> update(@PathVariable("id") Long id, @RequestBody OrdenToSaveDto ordenDto) {
         try {
             OrdenDto ordenDtoUpdated = ordenService.update(id, ordenDto);
             return ResponseEntity.ok(ordenDtoUpdated);
@@ -49,7 +54,7 @@ public class OrdenController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteById(@PathVariable("id") Long id) {
         try {
             ordenService.deleteById(id);
             return ResponseEntity.noContent().build();
@@ -59,7 +64,7 @@ public class OrdenController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<OrdenDto> updateStatus(@PathVariable Long id, String status) {
+    public ResponseEntity<OrdenDto> updateStatus(@PathVariable("id") Long id, @RequestBody String status) {
         try {
             OrdenDto ordenDtoUpdated = ordenService.updateStatus(id, status);
             return ResponseEntity.ok(ordenDtoUpdated);

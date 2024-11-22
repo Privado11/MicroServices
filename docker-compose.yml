@@ -1,0 +1,44 @@
+version: '3'
+services:
+  db-product:
+    container_name: db-product
+    image: postgres:15.2
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ecommerce_products
+      POSTGRES_USER: privado11
+      POSTGRES_PASSWORD: privado
+      
+    ports:
+      - 5431:5431
+    expose:
+      - 5431
+    command: -p 5431
+  
+  db-user:
+    container_name: db-user
+    image: postgres:15.2
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ecommerce_users
+      POSTGRES_USER: privado11
+      POSTGRES_PASSWORD: privado
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+    command: -p 5432
+
+  db-order:
+    container_name: db-order
+    image: postgres:15.2
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ecommerce_orders
+      POSTGRES_USER: privado11
+      POSTGRES_PASSWORD: privado
+    ports:
+      - 5433:5433
+    expose:
+      - 5433
+    command: -p 5433
