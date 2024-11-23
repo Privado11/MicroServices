@@ -9,7 +9,9 @@ import com.ecommerce.order.dto.OrdenMapper;
 import com.ecommerce.order.dto.OrdenToSaveDto;
 import com.ecommerce.order.exception.NotFoundExceptionEntity;
 import com.ecommerce.order.models.Orden;
+
 import com.ecommerce.order.repository.OrdenRepository;
+import com.ecommerce.order.service.orderitem.OrdenItemService;
 
 import java.util.List;
 
@@ -19,16 +21,22 @@ public class OrdenServiceImpl implements OrdenService{
     private final OrdenRepository ordenRepository;
     private final OrdenMapper ordenMapper;
 
+    private final OrdenItemService ordenItemService;
+
     @Autowired
-    public OrdenServiceImpl(OrdenRepository ordenRepository, OrdenMapper ordenMapper) {
+    public OrdenServiceImpl(OrdenRepository ordenRepository, OrdenMapper ordenMapper, OrdenItemService ordenItemService) {
         this.ordenRepository = ordenRepository;
         this.ordenMapper = ordenMapper;
+        this.ordenItemService = ordenItemService;
     }
 
     @Override
     public OrdenDto save(OrdenToSaveDto ordenDto) {
         Orden orden = ordenMapper.toSaveDto(ordenDto);
-        return ordenMapper.toDto(ordenRepository.save(orden));
+        Orden ordenSaved = ordenRepository.save(orden);
+        ordenItemService.save(ordenSaved, ordenDto);
+        return ordenMapper.toDto(ordenSaved);
+        
     }
 
     @Override

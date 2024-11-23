@@ -1,4 +1,22 @@
 package com.ecommerce.order.dto;
 
-public record OrdenDto(Long id, String name, String description, String status, Long userId) {
+import java.util.List;
+
+import com.ecommerce.order.dto.orderitems.OrdenItemDto;
+
+
+
+public record OrdenDto(
+    Long id, 
+    Long userId,
+    String status, 
+    List<OrdenItemDto> orderItems) {
+
+        public List<OrdenItemDto> orderItem() {
+            if (orderItems == null) {
+                return List.of();
+            }
+
+            return List.copyOf(orderItems);
+        }
 }

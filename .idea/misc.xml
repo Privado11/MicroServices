@@ -3,10 +3,18 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/ApiGateway" />
+    <file type="web" url="file://$PROJECT_DIR$/ConfigServer" />
     <file type="web" url="file://$PROJECT_DIR$/DiscoveryService" />
     <file type="web" url="file://$PROJECT_DIR$/Order" />
     <file type="web" url="file://$PROJECT_DIR$/Product" />
     <file type="web" url="file://$PROJECT_DIR$/User" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/config-server/pom.xml" />
+      </list>
+    </option>
   </component>
   <component name="ProjectRootManager">
     <output url="file://$PROJECT_DIR$/out" />
