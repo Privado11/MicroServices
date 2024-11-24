@@ -1,5 +1,7 @@
 package com.ecommerce.order.models;
 
+import com.ecommerce.order.client.ProductDto;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,5 +31,8 @@ public class OrdenItem {
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Orden order;
+
+    @Transient
+    private ProductDto product;
 
 }

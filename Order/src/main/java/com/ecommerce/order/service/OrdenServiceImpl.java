@@ -1,9 +1,13 @@
 package com.ecommerce.order.service;
 
 
+import org.apache.commons.math.stat.descriptive.summary.Product;
+import org.checkerframework.checker.units.qual.s;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ecommerce.order.client.ProductDto;
+import com.ecommerce.order.client.ProductFeignClient;
 import com.ecommerce.order.dto.OrdenDto;
 import com.ecommerce.order.dto.OrdenMapper;
 import com.ecommerce.order.dto.OrdenToSaveDto;
@@ -12,6 +16,8 @@ import com.ecommerce.order.models.Orden;
 
 import com.ecommerce.order.repository.OrdenRepository;
 import com.ecommerce.order.service.orderitem.OrdenItemService;
+
+import feign.FeignException;
 
 import java.util.List;
 
@@ -22,12 +28,15 @@ public class OrdenServiceImpl implements OrdenService{
     private final OrdenMapper ordenMapper;
 
     private final OrdenItemService ordenItemService;
+    
+    private final ProductFeignClient productFeignClient;
 
     @Autowired
-    public OrdenServiceImpl(OrdenRepository ordenRepository, OrdenMapper ordenMapper, OrdenItemService ordenItemService) {
+    public OrdenServiceImpl(OrdenRepository ordenRepository, OrdenMapper ordenMapper, OrdenItemService ordenItemService, ProductFeignClient productFeignClient) {
         this.ordenRepository = ordenRepository;
         this.ordenMapper = ordenMapper;
         this.ordenItemService = ordenItemService;
+        this.productFeignClient = productFeignClient;
     }
 
     @Override
@@ -52,16 +61,39 @@ public class OrdenServiceImpl implements OrdenService{
 
     @Override
     public OrdenDto findById(Long id) {
-        return ordenRepository.findById(id)
-                .map(ordenMapper::toDto)
-                .orElseThrow(() -> new NotFoundExceptionEntity("Orden not found"));
+        Orden orden = ordenRepository.findById(id)
+            .orElseThrow(() -> new NotFoundExceptionEntity("Orden not found"));
+
+        orden.getOrderItems().forEach(item -> {
+            try {
+                ProductDto product = findProductById(item.getProductId());
+                item.setProduct(product);
+            } catch (FeignException e) {
+                
+            }
+        });
+
+        return ordenMapper.toDto(orden);
     }
+    
 
     @Override
     public List<OrdenDto> findAll() {
         return ordenRepository.findAll().stream()
+                .peek(this::fetchProducts)
                 .map(ordenMapper::toDto)
                 .toList();
+    }
+
+    private void fetchProducts(Orden orden) {
+        orden.getOrderItems().forEach(item -> {
+            try {
+                ProductDto product = findProductById(item.getProductId());
+                item.setProduct(product);
+            } catch (FeignException e) {
+                
+            }
+        });
     }
 
     @Override
@@ -82,5 +114,15 @@ public class OrdenServiceImpl implements OrdenService{
                     return ordenMapper.toDto(ordenRepository.save(orden));
                 })
                 .orElseThrow(() -> new NotFoundExceptionEntity("Orden not found"));
+    }
+
+    @Override
+    public ProductDto findProductById(Long id) {
+        return productFeignClient.findById(id);
+    }
+
+    @Override
+    public List<ProductDto> findAllProducts() {
+        return productFeignClient.findAll();
     }
 }

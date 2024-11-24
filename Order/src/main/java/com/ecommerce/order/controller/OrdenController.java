@@ -2,11 +2,14 @@ package com.ecommerce.order.controller;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.ecommerce.order.client.ProductDto;
 import com.ecommerce.order.dto.OrdenDto;
 import com.ecommerce.order.dto.OrdenToSaveDto;
 import com.ecommerce.order.exception.NotFoundExceptionEntity;
@@ -71,5 +74,19 @@ public class OrdenController {
         } catch (NotFoundExceptionEntity ex) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/{id}/products")
+    public ResponseEntity<ProductDto> findProductById(@PathVariable("id") Long id) {
+        try {
+            return ResponseEntity.ok(ordenService.findProductById(id));
+        } catch (NotFoundExceptionEntity ex) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/products")
+    public ResponseEntity<List<ProductDto>> findAllProducts() {
+        return ResponseEntity.ok(ordenService.findAllProducts());
     }
 }
