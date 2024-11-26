@@ -22,8 +22,8 @@ public class OrdenItem {
     @Column(nullable = false)
     private Long productId;
 
-    @Column(nullable = false)
-    private Double price;
+    @Column
+    private Double total;
 
     @Column(nullable = false)
     private Integer quantity;
@@ -33,6 +33,11 @@ public class OrdenItem {
     private Orden order;
 
     @Transient
-    private ProductDto product;
+    private String productName;
 
+    @Transient
+    private String productDescription;
+
+    @Transient
+    private Double unitPrice;
 }

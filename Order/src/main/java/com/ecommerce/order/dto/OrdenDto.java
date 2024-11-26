@@ -4,11 +4,10 @@ import java.util.List;
 
 import com.ecommerce.order.dto.orderitems.OrdenItemDto;
 
-
-
 public record OrdenDto(
     Long id, 
     Long userId,
+    Double totalOrder,
     String status, 
     List<OrdenItemDto> orderItems) {
 

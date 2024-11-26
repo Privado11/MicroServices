@@ -24,6 +24,9 @@ public class Orden {
     @Column(nullable = false)
     private String status;
 
+    @Column
+    private Double totalOrder;
+
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrdenItem> orderItems;
 

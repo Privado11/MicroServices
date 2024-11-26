@@ -1,6 +1,5 @@
 package com.ecommerce.product.dto;
 
-
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

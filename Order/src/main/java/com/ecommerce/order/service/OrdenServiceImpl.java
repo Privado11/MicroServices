@@ -1,8 +1,5 @@
 package com.ecommerce.order.service;
 
-
-import org.apache.commons.math.stat.descriptive.summary.Product;
-import org.checkerframework.checker.units.qual.s;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +10,7 @@ import com.ecommerce.order.dto.OrdenMapper;
 import com.ecommerce.order.dto.OrdenToSaveDto;
 import com.ecommerce.order.exception.NotFoundExceptionEntity;
 import com.ecommerce.order.models.Orden;
-
+import com.ecommerce.order.models.OrdenItem;
 import com.ecommerce.order.repository.OrdenRepository;
 import com.ecommerce.order.service.orderitem.OrdenItemService;
 
@@ -42,11 +39,27 @@ public class OrdenServiceImpl implements OrdenService{
     @Override
     public OrdenDto save(OrdenToSaveDto ordenDto) {
         Orden orden = ordenMapper.toSaveDto(ordenDto);
+
+        orden.getOrderItems().forEach(item -> {
+            try {
+                ProductDto product = findProductById(item.getProductId());
+                if(product == null) {
+                    throw new RuntimeException("Producto con ID " + item.getProductId() + " no encontrado");
+                }
+                if (product.stock() < item.getQuantity()) {
+                    throw new RuntimeException("Producto con ID " + item.getProductId() + " no tiene suficiente stock");
+                }
+            } catch (FeignException.NotFound e) {
+                throw new NotFoundExceptionEntity("Producto con ID " + item.getProductId() + " no encontrado");   
+            }
+        });
+
         Orden ordenSaved = ordenRepository.save(orden);
         ordenItemService.save(ordenSaved, ordenDto);
-        return ordenMapper.toDto(ordenSaved);
+        return ordenMapper.toDto(setOrdenItem(ordenSaved));
         
     }
+
 
     @Override
     public OrdenDto update(Long id, OrdenToSaveDto ordenDto) {
@@ -63,19 +76,32 @@ public class OrdenServiceImpl implements OrdenService{
     public OrdenDto findById(Long id) {
         Orden orden = ordenRepository.findById(id)
             .orElseThrow(() -> new NotFoundExceptionEntity("Orden not found"));
-
-        orden.getOrderItems().forEach(item -> {
-            try {
-                ProductDto product = findProductById(item.getProductId());
-                item.setProduct(product);
-            } catch (FeignException e) {
-                
-            }
-        });
-
-        return ordenMapper.toDto(orden);
+        return ordenMapper.toDto(setOrdenItem(orden));
     }
     
+   private Orden setOrdenItem(Orden orden) {
+    Double totalOrder = 0.0;
+
+    for (OrdenItem item : orden.getOrderItems()) {
+        try {
+            ProductDto product = findProductById(item.getProductId());
+
+            item.setProductName(product.name());
+            item.setProductDescription(product.description());
+            item.setUnitPrice(product.price());
+
+            Double itemTotal = product.price() * item.getQuantity();
+            totalOrder += itemTotal;
+            item.setTotal(itemTotal);
+        } catch (FeignException.NotFound e) {
+            throw new NotFoundExceptionEntity("Producto con ID " + item.getProductId() + " no encontrado");
+        }
+    }
+
+    orden.setTotalOrder(totalOrder);
+    return orden;
+}
+
 
     @Override
     public List<OrdenDto> findAll() {
@@ -89,12 +115,15 @@ public class OrdenServiceImpl implements OrdenService{
         orden.getOrderItems().forEach(item -> {
             try {
                 ProductDto product = findProductById(item.getProductId());
-                item.setProduct(product);
-            } catch (FeignException e) {
-                
+                item.setProductName(product.name());
+                item.setProductDescription(product.description());
+                item.setUnitPrice(product.price());
+            } catch (FeignException.NotFound e) {
+                throw new NotFoundExceptionEntity("Producto con ID " + item.getProductId() + " no encontrado");   
             }
         });
     }
+
 
     @Override
     public void deleteById(Long id) {
