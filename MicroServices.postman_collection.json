@@ -1,0 +1,496 @@
+{
+	"info": {
+		"_postman_id": "e6c0c80f-5913-4716-b539-3b758508283f",
+		"name": "MicroServices",
+		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29233769"
+	},
+	"item": [
+		{
+			"name": "Gateway",
+			"item": [
+				{
+					"name": "orders",
+					"item": [
+						{
+							"name": "saveOrder",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJGSG52OWlWdjdWb2tmbDRJYlpDNmZaQUp4UXFGclBFa0kyWFQ3a1d2WXpFIn0.eyJleHAiOjE3MzI2NjAwMzksImlhdCI6MTczMjY1OTczOSwianRpIjoiNTA3MjkyMjYtMjkwMC00N2VlLWFlMmYtNjNlZTYxZWMyMWRjIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgxL3JlYWxtcy9lY29tbWVyY2UtcmVhbG0iLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYjA3ZTAyYWQtZDk3ZS00YmUwLWEyNTItODRhYjBjMzkxMTk3IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZWNvbW1lcmNlLWNsaWVudC1pZCIsInNlc3Npb25fc3RhdGUiOiJkMzc0ODA4OS1iOGQzLTQzYTctYjkzNS05N2FlZDVkZmI0NzgiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJBRE1JTiIsInVtYV9hdXRob3JpemF0aW9uIiwiVVNFUiIsImRlZmF1bHQtcm9sZXMtZWNvbW1lcmNlLXJlYWxtIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiZDM3NDgwODktYjhkMy00M2E3LWI5MzUtOTdhZWQ1ZGZiNDc4IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJXYWx0ZXIgSmltw6luZXoiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJwcml2YWRvIiwiZ2l2ZW5fbmFtZSI6IldhbHRlciIsImZhbWlseV9uYW1lIjoiSmltw6luZXoiLCJlbWFpbCI6IndqaW1lbmV6QHVuaW1hZ2RhbGVuYS5lZHUuY28ifQ.ncSWtldDNiQtIWU7K7fZTSqT7UYifwl6Oli0ODf1HY3cg7OuQWqL1QSLxY61ftR3eIybO5lkHJT3The3n2FZw3Rbd3oUL91svhrrggDzYpsg5usub5JxQrmLe5CkUR_EGCx3rpsd8ahU7PrWkYGNd4Vx3fuBMbrk6li3_yCDwTWgOiYwcJ7BqGLv3hgqhgv3Ld13NqWE24DxD_77uYCDivSt4KDYY8v7L0n4mug1_x2V8GCUACcHMU92BSNtkjdNK6XM51zfn5JTF32Lzuri5BZEHcvKD9n9--GuXDakz6TTo4njTAAt2f7vvJHiGVBuz_053SYdl-pROYEEPJ0iGA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": 1,\n    \"status\": \"pending\",\n    \"orderItems\": [\n        {\n            \"productId\": 1,\n            \"quantity\": 3\n        },\n        {\n            \"productId\": 2,\n            \"quantity\": 1\n        }\n    ]\n\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/orders",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrder",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJGSG52OWlWdjdWb2tmbDRJYlpDNmZaQUp4UXFGclBFa0kyWFQ3a1d2WXpFIn0.eyJleHAiOjE3MzI2NjAwMzksImlhdCI6MTczMjY1OTczOSwianRpIjoiNTA3MjkyMjYtMjkwMC00N2VlLWFlMmYtNjNlZTYxZWMyMWRjIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgxL3JlYWxtcy9lY29tbWVyY2UtcmVhbG0iLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYjA3ZTAyYWQtZDk3ZS00YmUwLWEyNTItODRhYjBjMzkxMTk3IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZWNvbW1lcmNlLWNsaWVudC1pZCIsInNlc3Npb25fc3RhdGUiOiJkMzc0ODA4OS1iOGQzLTQzYTctYjkzNS05N2FlZDVkZmI0NzgiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJBRE1JTiIsInVtYV9hdXRob3JpemF0aW9uIiwiVVNFUiIsImRlZmF1bHQtcm9sZXMtZWNvbW1lcmNlLXJlYWxtIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiZDM3NDgwODktYjhkMy00M2E3LWI5MzUtOTdhZWQ1ZGZiNDc4IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJXYWx0ZXIgSmltw6luZXoiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJwcml2YWRvIiwiZ2l2ZW5fbmFtZSI6IldhbHRlciIsImZhbWlseV9uYW1lIjoiSmltw6luZXoiLCJlbWFpbCI6IndqaW1lbmV6QHVuaW1hZ2RhbGVuYS5lZHUuY28ifQ.ncSWtldDNiQtIWU7K7fZTSqT7UYifwl6Oli0ODf1HY3cg7OuQWqL1QSLxY61ftR3eIybO5lkHJT3The3n2FZw3Rbd3oUL91svhrrggDzYpsg5usub5JxQrmLe5CkUR_EGCx3rpsd8ahU7PrWkYGNd4Vx3fuBMbrk6li3_yCDwTWgOiYwcJ7BqGLv3hgqhgv3Ld13NqWE24DxD_77uYCDivSt4KDYY8v7L0n4mug1_x2V8GCUACcHMU92BSNtkjdNK6XM51zfn5JTF32Lzuri5BZEHcvKD9n9--GuXDakz6TTo4njTAAt2f7vvJHiGVBuz_053SYdl-pROYEEPJ0iGA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/orders",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updatedOrder",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": 1,\n    \"status\": \"pending\",\n    \"orderItems\": [\n        {\n            \"productId\": 1,\n            \"price\": 999.00,\n            \"quantity\": 1\n        },\n        {\n            \"productId\": 2,\n             \"price\": 999.00,\n            \"quantity\": 1\n        }\n    ]\n\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/orders/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deletedOrder",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/orders/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "products",
+					"item": [
+						{
+							"name": "saveProduct",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJGSG52OWlWdjdWb2tmbDRJYlpDNmZaQUp4UXFGclBFa0kyWFQ3a1d2WXpFIn0.eyJleHAiOjE3MzI2NDM1NTYsImlhdCI6MTczMjY0MzI1NiwianRpIjoiMjMwOGIyYmEtMmE3ZS00NmQyLTlhMDEtMTA5NGM5YWM1NTVmIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgxL3JlYWxtcy9lY29tbWVyY2UtcmVhbG0iLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiMjViZDY5ZmItM2UyZC00YjE2LWEzYjEtZTQ3ZDU0NDJkODhjIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZWNvbW1lcmNlLWNsaWVudC1pZCIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy1lY29tbWVyY2UtcmVhbG0iXX0sInJlc291cmNlX2FjY2VzcyI6eyJlY29tbWVyY2UtY2xpZW50LWlkIjp7InJvbGVzIjpbInVtYV9wcm90ZWN0aW9uIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImNsaWVudEhvc3QiOiIxNzIuMjAuMC4xIiwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VydmljZS1hY2NvdW50LWVjb21tZXJjZS1jbGllbnQtaWQiLCJjbGllbnRBZGRyZXNzIjoiMTcyLjIwLjAuMSIsImNsaWVudF9pZCI6ImVjb21tZXJjZS1jbGllbnQtaWQifQ.aPglYbll4H4OHz2znYthz8MWdhrAy3TRH3oI_Ix1P0MMXQJFxvXvAjfhUeM693mNeoOIYyTQbmyiGpczAA3dFrpC7c9okzNjbjUDWxwh1D3e8Y1nfA6IXqB-rsW2T72cFAJNK2bAsfsjZLaDta8WNwXwdWo-BYkT_V8yowkfpBKt25mqNf0PXVf0p0wSl4RnCrxLkoQeJxww5mKGE4-fHx2SVFn0X5X6ddI6cWrQ1ugkU0JucnQbnFZ85JXQqArvtPCJgm3zTQGRn4-lCKOr3eiKhHI1NasVgL7-ehbxaY85-tFG-tu-EUBTyQ1vLjd5ua4yugXgB14iMeT-8EBlsw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Produtc1\",\n    \"description\": \"Produtcto para pruebas\",\n    \"price\": 999.00,\n    \"stock\": 20\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/products",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getProduct",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/products",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updatedProduct",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJGSG52OWlWdjdWb2tmbDRJYlpDNmZaQUp4UXFGclBFa0kyWFQ3a1d2WXpFIn0.eyJleHAiOjE3MzI2NDc1MTIsImlhdCI6MTczMjY0NzIxMiwianRpIjoiN2ExOTM4NWEtZDhlNy00OWJmLTlmYzgtZmYxMGUwMWJiMzgzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgxL3JlYWxtcy9lY29tbWVyY2UtcmVhbG0iLCJzdWIiOiJiZjlmODM2NS1kMzIzLTQyYTktYWE2MC1lZGMyODhiN2U0YjkiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJlY29tbWVyY2UtY2xpZW50LWlkIiwic2Vzc2lvbl9zdGF0ZSI6ImJhNzA4MmQ3LTc3ZmYtNDc3OS05MDZiLWVkNWI2ZmZiYTc0MCIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJVU0VSIl19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiJiYTcwODJkNy03N2ZmLTQ3NzktOTA2Yi1lZDViNmZmYmE3NDAiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IlVzZXIgQmFzaWMiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2VyYmFzaWMiLCJnaXZlbl9uYW1lIjoiVXNlciIsImZhbWlseV9uYW1lIjoiQmFzaWMiLCJlbWFpbCI6InVzZXJiYXNpY0BnbWFpbC5jb20ifQ.XuDRPqyGJEUa0cRu03WbHyoRM7anF7JW5GtDOV8pkZ2S5kt6FowgGzhZPh_JGaXsuqmOrfD73nIlFwURhuH7qhLIQpAsDcIbcC-5ushrkfdtjSJZY-wUxPZh8M2ec_8paTCEPsKSILE-IBDe6wb-aasx42hfZmlcOpHrvrDRPGzDT5kdoUjD32JbF5SoIRoHMV6O9vZy8x5XIdq_1PvHjwtdmOqZ7w-XUuhsNaos2H0Wcu2eluokMvPfQhKfZNxJxX0Qt9yhs46kESNDLaDepkoTG4iDZX-ICnmYSrP7eRM8S7kWVTv_ecYyHstgT8jou5iJ-h0zVktjK2b2_FwjeQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Produtc1\",\n    \"description\": \"Produtcto para pruebas\",\n    \"price\": 999.00,\n    \"stock\": 20\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/products/8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"products",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deletedProduct",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJGSG52OWlWdjdWb2tmbDRJYlpDNmZaQUp4UXFGclBFa0kyWFQ3a1d2WXpFIn0.eyJleHAiOjE3MzI2NDc1MTIsImlhdCI6MTczMjY0NzIxMiwianRpIjoiN2ExOTM4NWEtZDhlNy00OWJmLTlmYzgtZmYxMGUwMWJiMzgzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgxL3JlYWxtcy9lY29tbWVyY2UtcmVhbG0iLCJzdWIiOiJiZjlmODM2NS1kMzIzLTQyYTktYWE2MC1lZGMyODhiN2U0YjkiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJlY29tbWVyY2UtY2xpZW50LWlkIiwic2Vzc2lvbl9zdGF0ZSI6ImJhNzA4MmQ3LTc3ZmYtNDc3OS05MDZiLWVkNWI2ZmZiYTc0MCIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJVU0VSIl19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiJiYTcwODJkNy03N2ZmLTQ3NzktOTA2Yi1lZDViNmZmYmE3NDAiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IlVzZXIgQmFzaWMiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2VyYmFzaWMiLCJnaXZlbl9uYW1lIjoiVXNlciIsImZhbWlseV9uYW1lIjoiQmFzaWMiLCJlbWFpbCI6InVzZXJiYXNpY0BnbWFpbC5jb20ifQ.XuDRPqyGJEUa0cRu03WbHyoRM7anF7JW5GtDOV8pkZ2S5kt6FowgGzhZPh_JGaXsuqmOrfD73nIlFwURhuH7qhLIQpAsDcIbcC-5ushrkfdtjSJZY-wUxPZh8M2ec_8paTCEPsKSILE-IBDe6wb-aasx42hfZmlcOpHrvrDRPGzDT5kdoUjD32JbF5SoIRoHMV6O9vZy8x5XIdq_1PvHjwtdmOqZ7w-XUuhsNaos2H0Wcu2eluokMvPfQhKfZNxJxX0Qt9yhs46kESNDLaDepkoTG4iDZX-ICnmYSrP7eRM8S7kWVTv_ecYyHstgT8jou5iJ-h0zVktjK2b2_FwjeQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/products/8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"products",
+										"8"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Token",
+			"item": [
+				{
+					"name": "getTokenAdmin",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "ecommerce-client-id",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "7H2vFD95jKIaaRXD4QrxslUdEWQalAkW",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "privado",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Privado11",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8181/realms/ecommerce-realm/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8181",
+							"path": [
+								"realms",
+								"ecommerce-realm",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTokenUserBasic",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "ecommerce-client-id",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "7H2vFD95jKIaaRXD4QrxslUdEWQalAkW",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "userbasic",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Privado11",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8181/realms/ecommerce-realm/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8181",
+							"path": [
+								"realms",
+								"ecommerce-realm",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "useBrowser",
+				"value": false,
+				"type": "boolean"
+			},
+			{
+				"key": "scope",
+				"value": "openid",
+				"type": "string"
+			},
+			{
+				"key": "clientSecret",
+				"value": "7H2vFD95jKIaaRXD4QrxslUdEWQalAkW",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "ecommerce-client-id",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "http://localhost:8181/realms/ecommerce-realm/protocol/openid-connect/token",
+				"type": "string"
+			},
+			{
+				"key": "authUrl",
+				"value": "http://localhost:8181/realms/ecommerce-realm/protocol/openid-connect/auth",
+				"type": "string"
+			},
+			{
+				"key": "redirect_uri",
+				"value": "http://oauth.pstmn.io/v1/browser-callback",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "authorization_code",
+				"type": "string"
+			},
+			{
+				"key": "tokenName",
+				"value": "ecommerce_token",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://postman-rest-api-learner.glitch.me/"
+		}
+	]
+}
